@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import { supabase, getCurrentUser, getSession, onAuthStateChange } from '../services/supabaseClient';
-
+import { Session, AuthChangeEvent } from '@supabase/supabase-js';
 // Define the auth context type
 interface AuthContextType {
   user: any | null;
@@ -40,11 +40,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     initializeAuth();
     
     // Set up auth state change listener
-    const { data: authListener } = onAuthStateChange((event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
+//    const { data: authListener } = onAuthStateChange((event, session) => {
+  //    setSession(session);
+//      setUser(session?.user ?? null);
+  //    setLoading(false);
+//    });
+    
+
+
+const { data: authListener } = onAuthStateChange(
+  (event: AuthChangeEvent, session: Session | null) => {
+    setSession(session);
+    setUser(session?.user ?? null);
+    setLoading(false);
+  });
     
     // Clean up listener on unmount
     return () => {

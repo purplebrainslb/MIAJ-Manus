@@ -1,5 +1,5 @@
 import { supabase } from '../services/supabaseClient';
-import { uploadFile } from '../../supabase/storage_config';
+import { uploadFile } from '../../../supabase/storage_config';
 
 // Type definitions
 interface Relationship {

@@ -1,5 +1,5 @@
 import { supabase } from '../services/supabaseClient';
-import { uploadFile, getFileUrl, deleteFile } from '../../supabase/storage_config';
+import { uploadFile, getFileUrl, deleteFile } from '../supabase/storage_config';
 
 // Type definitions
 interface Memory {

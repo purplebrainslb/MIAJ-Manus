@@ -1,30 +1,75 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Suspense } from 'react';
-import './App.css';
-import HomePage from './pages/HomePage'; // Direct import of your HomePage component
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import '../styles/global.css';
+import Header from '../components/layout/Header';
+import Footer from '../components/layout/Footer';
+import HomePage from '../pages/HomePage';
+import LoginPage from '../pages/LoginPage';
+import RegisterPage from '../pages/RegisterPage';
+import DashboardPage from '../pages/DashboardPage';
+import CreateRelationshipPage from '../pages/CreateRelationshipPage';
+import RelationshipDetailPage from '../pages/RelationshipDetailPage';
+import AddMemoryPage from '../pages/AddMemoryPage';
+import RevealPage from '../pages/RevealPage';
+import NotFoundPage from '../pages/NotFoundPage';
+import PrivateRoute from '../components/auth/PrivateRoute';
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <header className="App-header">
-          <h1>Memory in a Jar</h1>
-          <p>A place to store your precious memories</p>
-        </header>
-        
-        <main>
-          <Suspense fallback={<p>Loading...</p>}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-            </Routes>
-          </Suspense>
+    <Router>
+      <div className="app">
+        <Header />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route 
+              path="/dashboard" 
+              element={
+                <PrivateRoute>
+                  <DashboardPage />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/relationships/create" 
+              element={
+                <PrivateRoute>
+                  <CreateRelationshipPage />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/relationships/:id" 
+              element={
+                <PrivateRoute>
+                  <RelationshipDetailPage />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/relationships/:id/add-memory" 
+              element={
+                <PrivateRoute>
+                  <AddMemoryPage />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/relationships/:id/reveal" 
+              element={
+                <PrivateRoute>
+                  <RevealPage />
+                </PrivateRoute>
+              } 
+            />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </main>
-        
-        <footer>
-          <p>© 2025 Memory in a Jar</p>
-        </footer>
+        <Footer />
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 

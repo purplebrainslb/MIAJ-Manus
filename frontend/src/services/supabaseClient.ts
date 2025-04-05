@@ -49,6 +49,8 @@ export const getSession = async () => {
 };
 
 // Auth state change subscription
-export const onAuthStateChange = (callback) => {
+export const onAuthStateChange = (
+  callback: (event: AuthChangeEvent, session: Session | null) => void
+) => {
   return supabase.auth.onAuthStateChange(callback);
 };

@@ -1,0 +1,233 @@
+/* App.css - Main application styling */
+
+.App {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: var(--spacing-lg) 0;
+}
+
+/* Animation effects */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive container adjustments */
+.container {
+  padding: 0 var(--spacing-md);
+}
+
+@media (min-width: 576px) {
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* Page transitions */
+.page-transition-enter {
+  opacity: 0;
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+/* Focus styles for accessibility */
+:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--medium-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-gray);
+}
+
+/* Selection styling */
+::selection {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Jar visualization styling */
+.jar-container {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  margin: 0 auto;
+  margin-bottom: var(--spacing-lg);
+}
+
+.jar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 3px solid var(--primary-color);
+  border-radius: 20px 20px 50px 50px;
+  overflow: hidden;
+}
+
+.jar-lid {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 20px;
+  background-color: var(--primary-color);
+  border-radius: 10px 10px 0 0;
+}
+
+.jar-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--pastel-yellow);
+  transition: height 0.5s ease;
+}
+
+.memory-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  opacity: 0.7;
+  animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Progress indicators */
+.progress-bar {
+  height: 8px;
+  background-color: var(--medium-gray);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--spacing-md);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius-sm);
+  transition: width 0.3s ease;
+}
+
+/* Tooltip styling */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: var(--dark-gray);
+  color: white;
+  text-align: center;
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Print styles */
+@media print {
+  header, footer, .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background-color: white;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .card, .memory-card, .relationship-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}

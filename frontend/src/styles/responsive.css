@@ -1,0 +1,259 @@
+/* Responsive design optimizations for Memory in a Jar */
+
+/* Base responsive adjustments */
+html {
+  font-size: 16px; /* Base font size */
+}
+
+/* Small devices (phones, 576px and down) */
+@media (max-width: 576px) {
+  html {
+    font-size: 14px; /* Slightly smaller base font size for mobile */
+  }
+  
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  /* Header adjustments for mobile */
+  .header .logo-text {
+    font-size: var(--font-size-medium);
+  }
+  
+  .logo {
+    height: 30px;
+  }
+  
+  /* Form adjustments */
+  .form-container {
+    padding: var(--spacing-md);
+  }
+  
+  /* Button adjustments */
+  button, 
+  .btn-primary, 
+  .btn-secondary, 
+  .btn-accent, 
+  .btn-outline {
+    width: 100%; /* Full width buttons on mobile */
+  }
+  
+  /* Hero section adjustments */
+  .hero-section {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-subtitle {
+    font-size: var(--font-size-medium);
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  /* Footer adjustments */
+  .footer {
+    text-align: center;
+  }
+  
+  .footer .flex {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .footer-links {
+    justify-content: center;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 577px) and (max-width: 991px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+  
+  /* Adjust grid layouts for tablets */
+  .dashboard-grid,
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  /* Increase touch targets */
+  button, 
+  .btn-primary, 
+  .btn-secondary, 
+  .btn-accent, 
+  .btn-outline,
+  .nav-link,
+  .footer-link {
+    padding: var(--spacing-md) var(--spacing-lg);
+    min-height: 44px; /* Minimum touch target size */
+  }
+  
+  /* Remove hover effects that don't work well on touch devices */
+  .card:hover,
+  .memory-card:hover,
+  .relationship-card:hover,
+  .feature-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+  
+  /* Adjust form elements for touch */
+  input, 
+  select, 
+  textarea {
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: var(--spacing-md);
+  }
+  
+  /* Increase spacing between interactive elements */
+  .nav-list {
+    gap: var(--spacing-lg);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .header, 
+  .footer, 
+  .nav-list, 
+  .hero-buttons,
+  .feature-card,
+  button {
+    display: none;
+  }
+  
+  a {
+    text-decoration: underline;
+    color: #000;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+  
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+  
+  .memory-card,
+  .relationship-card,
+  .reveal-memory {
+    page-break-inside: avoid;
+    border: 1px solid #ddd;
+    box-shadow: none;
+  }
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-color: #006666;
+    --text-color: #000000;
+    --background-color: #ffffff;
+    --light-gray: #f0f0f0;
+    --medium-gray: #999999;
+    --dark-gray: #666666;
+    --accent-color: #cc0000;
+  }
+  
+  a, button, .nav-link {
+    text-decoration: underline;
+  }
+  
+  input, textarea, select {
+    border: 2px solid #000000;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .memory-card:hover,
+  .relationship-card:hover,
+  .feature-card:hover {
+    transform: none;
+  }
+}
+
+/* Screen orientation specific styles */
+@media screen and (orientation: portrait) {
+  /* Optimize layouts for portrait mode (especially on tablets) */
+  .dashboard-grid,
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  @media (min-width: 768px) {
+    .dashboard-grid,
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  /* Optimize for landscape phones */
+  .hero-section {
+    padding: var(--spacing-lg) 0;
+  }
+  
+  .auth-page {
+    padding: var(--spacing-md) 0;
+  }
+}
+
+/* Fix for iOS input zoom */
+@supports (-webkit-touch-callout: none) {
+  input, select, textarea {
+    font-size: 16px;
+  }
+}
+
+/* Fix for notched phones */
+@supports (padding: max(0px)) {
+  .header, .footer {
+    padding-left: max(var(--spacing-md), env(safe-area-inset-left));
+    padding-right: max(var(--spacing-md), env(safe-area-inset-right));
+  }
+  
+  .footer {
+    padding-bottom: max(var(--spacing-md), env(safe-area-inset-bottom));
+  }
+}
